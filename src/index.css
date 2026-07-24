@@ -6,14 +6,14 @@
 
   --color-card: #141a1f;
 
-  --color-primary: #6767e9;
+  --color-primary: #7961ef;
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #1f2830;
   --color-secondary-foreground: #20b2a6;
 
   --color-muted: #252e37;
-  --color-muted-foreground: #7a8491;
+  --color-muted-foreground: #8f98a5;
 
   --color-border: #242b32;
 
@@ -51,6 +51,17 @@
     backdrop-filter: blur(24px);
     border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   }
+
+  .glow-text {
+    text-shadow: 0 0 30px
+      color-mix(in srgb, var(--color-primary) 50%, transparent);
+  }
+
+  .glow-border {
+    box-shadow:
+      0 0 20px color-mix(in srgb, var(--color-primary) 20%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
+  }
 }
 
 @layer utilities {
@@ -83,7 +94,71 @@
     }
   }
 
-  .animate-fade-in {
+  .animate-dropdown-fade-in {
     animation: fade-in 0.25s ease-out both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out both;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+
+  .animation-delay-900 {
+    animation-delay: 900ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  @keyframes animated-border {
+    0% {
+      stroke-dashoffset: 400;
+    }
+    100% {
+      stroke-dashoffset: -500;
+    }
+  }
+
+  .group:hover .animated-border-path {
+    animation: animated-border 1.5s linear infinite;
+  }
+
+  .animated-border:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 20px
+      color-mix(in srgb, var(--color-primary) 15%, transparent);
   }
 }
