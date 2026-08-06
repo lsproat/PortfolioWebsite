@@ -1,40 +1,51 @@
-const dots = Array.from({ length: 30 }, (_, i) => ({
-  id: i,
-  left: Math.random() * 100,
-  top: Math.random() * 100,
-  duration: 15 + Math.random() * 20,
-  delay: Math.random() * 5,
-}));
+import { CloudCog, Gauge, Layers3, ServerCog } from "lucide-react";
+import { Stars } from "../components/Stars";
+
+const highlights = [
+  {
+    icon: ServerCog,
+    title: "Backend Systems",
+    description:
+      "Building scalable C# and .NET services designed for reliability and long-term growth.",
+  },
+  {
+    icon: Gauge,
+    title: "Performance",
+    description:
+      "Reducing latency and improving efficiency through focused backend and system optimization.",
+  },
+  {
+    icon: CloudCog,
+    title: "Cloud & DevOps",
+    description:
+      "Modernizing Azure infrastructure and deployment pipelines for reliable, consistent releases.",
+  },
+  {
+    icon: Layers3,
+    title: "Full-Stack Development",
+    description:
+      "Delivering practical features across APIs, data, and responsive React interfaces.",
+  },
+];
 
 export const About = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src="/about-background-tmp.png"
-          alt="About image"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/20 to-background" />
-      </div>
+    <section id="about" className="py-32 relative overflow-hidden">
+      <div>
+        <div>
+          {/* Left */}
+          <div>
+            <span>About Me</span>
+          </div>
 
-      {/* Dots */}
-      <div className="absolute inset-0 overflow-hidden">
-        {dots.map((dot) => (
-          <div
-            key={dot.id}
-            className="absolute w-1.5 h-1.5 rotate-45 opacity-40"
-            style={{
-              backgroundColor: "#6767e9",
-              left: `${dot.left}%`,
-              top: `${dot.top}%`,
-              animation: `slow-drift ${dot.duration}s ease-in-out infinite`,
-              animationDelay: `${dot.delay}s`,
-            }}
-          />
-        ))}
+          <h2>
+            Building the future,
+            <span>one component at a time.</span>
+          </h2>
+        </div>
+        <div>{/* Right */}</div>
       </div>
+      <Stars />
     </section>
   );
 };

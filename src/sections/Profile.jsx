@@ -1,15 +1,21 @@
 import { Button } from "@/components/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown, SparkleIcon } from "lucide-react";
 import { RiGithubFill, RiLinkedinFill } from "@remixicon/react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
+import { Stars } from "../components/Stars";
 
-const dots = Array.from({ length: 30 }, (_, i) => ({
-  id: i,
-  left: Math.random() * 100,
-  top: Math.random() * 100,
-  duration: 15 + Math.random() * 20,
-  delay: Math.random() * 5,
-}));
+const skills = [
+  "C#",
+  ".NET",
+  "SQL",
+  "Azure",
+  "Microservices",
+  "React",
+  "Git",
+  "CI/CD",
+  "Redis",
+  "Vercel",
+];
 
 export const Profile = () => {
   return (
@@ -18,37 +24,21 @@ export const Profile = () => {
       <div className="absolute inset-0">
         <img
           src="/profile-background-tmp.png"
-          alt="Profile image"
           className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/20 to-background" />
       </div>
 
-      {/* Dots */}
-      <div className="absolute inset-0 overflow-hidden">
-        {dots.map((dot) => (
-          <div
-            key={dot.id}
-            className="absolute w-1.5 h-1.5 rotate-45 opacity-40"
-            style={{
-              backgroundColor: "#6767e9",
-              left: `${dot.left}%`,
-              top: `${dot.top}%`,
-              animation: `slow-drift ${dot.duration}s ease-in-out infinite`,
-              animationDelay: `${dot.delay}s`,
-            }}
-          />
-        ))}
-      </div>
+      <Stars />
 
       {/* Content */}
       <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <div className="grid lg:grid-col-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
           {/* Left */}
           <div className="space-y-8">
             <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
-                <span className="w-2 h-2 bg-primary rotate-45 animate-pulse" />
+                <SparkleIcon className="w-4 h-4 fill-primary animate-pulse" />
                 Software Engineer
               </span>
             </div>
@@ -93,6 +83,7 @@ export const Profile = () => {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank"
                   className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
                 >
                   {<social.icon className="w-5 h-5" />}
@@ -115,11 +106,54 @@ export const Profile = () => {
                   className="w-full aspect-4/5 object-cover rounded-2xl"
                 />
 
-                {/* Badges */}
+                {/* AFW badge */}
+                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-sm font-medium">
+                      Available for work
+                    </span>
+                  </div>
+                </div>
+                {/* Stats badge */}
+                <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
+                  <div className="text-2xl font-bold text-primary">5+</div>
+                  <div className="text-xs text-muted-foreground">
+                    Years of Experience
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Skills */}
+        <div className="mt-20 animate-fade-in animation-delay-600">
+          <p className="text-sm text-muted-foreground mb-6 text-center">
+            Technologies I work with
+          </p>
+          <div className="relative overflow-hidden">
+            <div className="flex animate-marquee">
+              {[...skills, ...skills].map((skill, index) => (
+                <div key={index} className="flex-shrink-0 px-8 py-4">
+                  <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">
+                    {skill}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-800">
+        <a
+          href="#about"
+          className="flex flex-col items-center gap-2 text-muted-foreground"
+        >
+          <span className="text-xs uppercase tracking-wider">Scroll</span>
+          <ChevronDown className="w-6 h-6 animate-bounce" />
+        </a>
       </div>
     </section>
   );
