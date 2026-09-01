@@ -15,7 +15,7 @@ const starArray = Array.from({ length: 30 }, (_, i) => ({
 
 export const Stars = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {starArray.map((star) => (
         <SparkleIcon
           key={star.id}
