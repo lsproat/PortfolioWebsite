@@ -1,5 +1,4 @@
 import { CloudCog, Gauge, Layers3, ServerCog } from "lucide-react";
-import { Stars } from "../components/Stars";
 
 const highlights = [
   {
@@ -93,7 +92,6 @@ export const About = () => {
           </div>
         </div>
       </div>
-      <Stars />
     </section>
   );
 };

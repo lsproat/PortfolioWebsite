@@ -1,10 +1,11 @@
 import { SparkleIcon } from "lucide-react";
+const STAR_COUNT = 150;
 
 const randomIntInRange = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const starArray = Array.from({ length: 30 }, (_, i) => ({
+const starArray = Array.from({ length: STAR_COUNT }, (_, i) => ({
   id: i,
   left: Math.random() * 100,
   top: Math.random() * 100,
@@ -15,12 +16,12 @@ const starArray = Array.from({ length: 30 }, (_, i) => ({
 
 export const Stars = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
       {starArray.map((star) => (
         <SparkleIcon
           key={star.id}
           fill="white"
-          className="absolute w-3.5 h-3.5 opacity-40"
+          className="absolute w-3.5 h-3.5 opacity-25"
           style={{
             left: `${star.left}%`,
             top: `${star.top}%`,

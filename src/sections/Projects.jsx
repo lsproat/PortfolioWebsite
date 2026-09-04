@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import { Stars } from "../components/Stars";
 import { RiGithubFill } from "@remixicon/react";
+import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
 const projects = [
   {
@@ -40,9 +40,9 @@ export const Projects = () => {
             </span>
           </h2>
           <p className="text-muted-foreground animate-fade-in animation-delay-200">
-            Here are some of my projects that I think demonstrate my best work.
-            Source code is available where applicable so please click the GitHub
-            links to take a look.
+            Some of my projects that I think demonstrate my best work. Source
+            code is available where applicable so please click the GitHub links
+            to take a look.
           </p>
         </div>
 
@@ -114,9 +114,14 @@ export const Projects = () => {
             </div>
           ))}
         </div>
-      </div>
 
-      <Stars />
+        <div className="text-center mt-12 animate-fade-in animation-delay-500">
+          <AnimatedBorderButton>
+            View All Projects
+            <ArrowUpRight className="w-5 h-5" />
+          </AnimatedBorderButton>
+        </div>
+      </div>
     </section>
   );
 };

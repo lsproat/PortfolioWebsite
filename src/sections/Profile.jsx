@@ -1,8 +1,7 @@
 import { Button } from "@/components/button";
-import { ArrowRight, ChevronDown, SparkleIcon } from "lucide-react";
+import { ArrowRight, ChevronDown, Download, SparkleIcon } from "lucide-react";
 import { RiGithubFill, RiLinkedinFill } from "@remixicon/react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
-import { Stars } from "../components/Stars";
 
 const skills = [
   "C#",
@@ -28,9 +27,6 @@ export const Profile = () => {
         />
         <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/20 to-background" />
       </div>
-
-      <Stars />
-
       {/* Content */}
       <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
@@ -67,7 +63,9 @@ export const Profile = () => {
               <Button size="lg">
                 Contact Me <ArrowRight className="w-5 h-5" />
               </Button>
-              <AnimatedBorderButton />
+              <AnimatedBorderButton>
+                <Download className="w-5 h-5" /> Download Resume
+              </AnimatedBorderButton>
             </div>
 
             {/* External Links */}
