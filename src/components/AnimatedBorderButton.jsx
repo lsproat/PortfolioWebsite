@@ -1,5 +1,6 @@
 export const AnimatedBorderButton = ({ children }) => {
   return (
+    // TODO: Fixed visual line issue
     <button
       className="relative bg-transparent border border-border 
         text-foreground hover:border-primary/50 transition-all 

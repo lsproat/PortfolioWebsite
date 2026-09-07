@@ -1,29 +1,30 @@
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
+import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
 const linkedInRecommendationsLink =
   "https://www.linkedin.com/in/lucassproat/details/recommendations/?detailScreenTabIndex=0";
 const testimonials = [
   {
     quote:
-      "Beyond his technical skills, what really sets Lucas apart is his willingness to help others succeed. … Lucas is a dependable, collaborative developer who elevates the people around him. Any team would be lucky to have him.",
-    author: "Alexandra Hawks",
-    role: "Scrum Master  - Prev. Hexaware Technologies",
-    profilePicture: "/testimonial-pics/alexandra-hawks.jpg",
+      "Lucas brings a thoughtful, disciplined approach to engineering and can be trusted to execute effectively with minimal oversight. His combination of ownership, consistency, and receptiveness to feedback makes him a valuable asset to any team.",
+    author: "Cynthia Garris",
+    role: "Product Manager - Prev. Hexaware Technologies",
+    profilePicture: "/testimonial-pics/cynthia-garris.jpg",
   },
   {
     quote:
-      "Lucas consistently showed up with a ‘can-do’ attitude and followed through with strong results, even when stepping into unfamiliar and challenging territory. He takes real ownership of what he works on and holds himself to a high standard.",
+      "Lucas consistently showed up with a “can-do” attitude and followed through with strong results, even when stepping into unfamiliar and challenging territory. He takes real ownership of what he works on and holds himself to a high standard.",
     author: "Austin Howard",
     role: "Software Developer - Prev. Hexaware Technologies",
     profilePicture: "/testimonial-pics/austin-howard.jpg",
   },
   {
     quote:
-      "What sets Lucas apart is his ability to stay open and adaptable. He actively seeks out and incorporates feedback, continuously improving both his work and his approach. Even when working independently, he remains aligned with team goals and product outcomes, ensuring that his contributions integrate seamlessly.",
-    author: "Cynthia Garris",
-    role: "Product Manager - Prev. Hexaware Technologies",
-    profilePicture: "/testimonial-pics/cynthia-garris.jpg",
+      "Beyond his technical skills, what really sets Lucas apart is his willingness to help others succeed. He’s always open to lending a hand, sharing context, or jumping in to unblock a teammate, regardless of whether it’s officially 'his' responsibility.",
+    author: "Alexandra Hawks",
+    role: "Scrum Master  - Prev. Hexaware Technologies",
+    profilePicture: "/testimonial-pics/alexandra-hawks.jpg",
   },
 ];
 
@@ -42,7 +43,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-10 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mx-auto max-w-3xl mb-16">
           <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
@@ -65,25 +66,36 @@ export const Testimonials = () => {
                 <Quote className="w-6 h-6 text-primary-foreground" />
               </div>
 
-              <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4">
-                "{testimonials[activeIndex].quote}"
-              </blockquote>
+              {/* Hidden slides still size the shared grid cell at every width. */}
+              <div className="grid">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={testimonial.author}
+                    aria-hidden={index !== activeIndex}
+                    className={`col-start-1 row-start-1 min-w-0 flex flex-col ${index === activeIndex ? "visible" : "invisible"}`}
+                  >
+                    <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4 flex-1">
+                      "{testimonial.quote}"
+                    </blockquote>
 
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonials[activeIndex].profilePicture}
-                  alt={testimonials[activeIndex].author}
-                  className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
-                />
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={testimonial.profilePicture}
+                        alt={testimonial.author}
+                        className="w-14 h-14 shrink-0 rounded-full object-cover ring-2 ring-primary/20"
+                      />
 
-                <div>
-                  <div className="font-semibold">
-                    {testimonials[activeIndex].author}
+                      <div className="min-w-0">
+                        <div className="font-semibold">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonials[activeIndex].role}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -114,6 +126,12 @@ export const Testimonials = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="text-center mt-8 animate-fade-in animation-delay-300">
+          <AnimatedBorderButton>
+            View All On LinkedIn
+            <ArrowUpRight className="w-5 h-5" />
+          </AnimatedBorderButton>
         </div>
       </div>
     </section>

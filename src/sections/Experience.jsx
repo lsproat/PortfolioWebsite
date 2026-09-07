@@ -1,3 +1,6 @@
+import { Astroid } from "lucide-react";
+import { useTimelineProgress } from "../hooks/useTimelineProgress";
+
 const experiences = [
   {
     period: "Jan 2026 — May 2026",
@@ -50,10 +53,11 @@ const experiences = [
     current: false,
   },
 ];
-
 export const Experience = () => {
+  const { timelineRef, lightRef, cardRefs, activeIndex } =
+    useTimelineProgress();
   return (
-    <section id="experience" className="py-32 relative overflow-hidden">
+    <section id="experience" className="py-10 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3x1 mb-16">
           <span className="text-secondary-foreground text-sm font-medium tacking-wider uppercase">
@@ -73,7 +77,26 @@ export const Experience = () => {
         </div>
 
         <div className="relative">
-          <div className="timeline-glow absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/70 via-primary/30 to to-transparent md:-translate-x-1/2 shadow-[o_0_25px_rgba(121,97,239,0.8)]" />
+          <div
+            ref={timelineRef}
+            className="timeline-glow absolute z-20 left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/70 via-primary/30 to to-transparent md:-translate-x-1/2 shadow-[o_0_25px_rgba(121,97,239,0.8)]"
+          >
+            <span
+              ref={lightRef}
+              className="absolute top-0 left-1/2 size-5 pointer-events-none text-primary"
+              style={{ visibility: "hidden" }}
+              aria-hidden="true"
+            >
+              <Astroid
+                fill="currentColor"
+                className="absolute inset-0 size-full"
+              />
+              <Astroid
+                fill="currentColor"
+                className="absolute inset-0 size-full origin-center motion-safe:animate-ping"
+              />
+            </span>
+          </div>
 
           <div className="space-y-12">
             {experiences.map((experience, index) => (
@@ -83,20 +106,20 @@ export const Experience = () => {
                 style={{ animationDelay: `${(index + 1) * 100}ms` }}
               >
                 {/* Dots */}
-                <div className="absolute left-px md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10">
-                  {/* TODO: Change behavior to pulse center most dot or highlighted
-                  card instead of experience with current=true */}
-                  {experience.current && (
-                    <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
-                  )}
-                </div>
+                <div
+                  className="absolute left-px md:left-1/2 top-0 w-2 h-2 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10"
+                  aria-hidden="true"
+                />
 
                 {/* Experience card content */}
                 <div
                   className={`pl-8 md:pl-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl-16"}`}
                 >
                   <div
-                    className={`glass p-6 rounded-2xl border border-primary/30 hover:border-primary transition-all duration-500`}
+                    ref={(element) => {
+                      cardRefs.current[index] = element;
+                    }}
+                    className={`glass p-6 rounded-2xl border ${activeIndex === index ? "border-primary glow-border" : "border-primary/30"} transition-colors duration-500`}
                   >
                     <span className="text-sm text-primary font-medium">
                       {experience.period}

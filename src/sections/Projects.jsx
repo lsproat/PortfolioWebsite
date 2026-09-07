@@ -25,7 +25,7 @@ const projects = [
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
+    <section id="projects" className="py-10 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mx-auto max-w-3xl mb-16">

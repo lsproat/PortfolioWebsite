@@ -6,6 +6,7 @@ import { ContactMe } from "@/sections/ContactMe";
 import { Navbar } from "@/layout/Navbar";
 import { Stars } from "./components/Stars";
 import { Testimonials } from "./sections/Testimonials";
+import { Footer } from "./layout/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Testimonials />
         <ContactMe />
       </main>
+      <Footer />
     </div>
   );
 }
