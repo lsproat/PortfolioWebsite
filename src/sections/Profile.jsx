@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import { Button } from "@/components/Button";
 import { ArrowRight, ChevronDown, Download, SparkleIcon } from "lucide-react";
 import { RiGithubFill, RiLinkedinFill } from "@remixicon/react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
