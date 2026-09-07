@@ -7,6 +7,7 @@ import { Navbar } from "@/layout/Navbar";
 import { Stars } from "./components/Stars";
 import { Testimonials } from "./sections/Testimonials";
 import { Footer } from "./layout/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <ContactMe />
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }
