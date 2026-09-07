@@ -11,7 +11,7 @@ env:
 
 jobs:
   deploy-preview:
-    name: Deploy Development
+    name: Deploy Preview
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,17 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Development
-        run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Verify Vercel configuration
+        run: |
+          echo "Project ID configured: ${{ secrets.VERCEL_PROJECT_ID != '' }}"
+          echo "Org ID configured: ${{ secrets.VERCEL_ORG_ID != '' }}"
+          echo "Token configured: ${{ secrets.VERCEL_TOKEN != '' }}"
 
-      - name: Build Development
+      - name: Pull Preview
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Preview
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Development
+      - name: Deploy Preview
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
