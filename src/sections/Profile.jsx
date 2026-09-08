@@ -21,10 +21,6 @@ export const Profile = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <img
-          src="/profile-background-tmp.png"
-          className="w-full h-full object-cover opacity-40"
-        />
         <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/20 to-background" />
       </div>
       {/* Content */}
