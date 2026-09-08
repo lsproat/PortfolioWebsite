@@ -25,7 +25,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-400 ${isScrolled ? "glass-strong py-3" : "bg-transparent py-5"}  z-50`}
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter,padding] duration-400 ${isScrolled ? "bg-surface/80 border-border/60 backdrop-blur-[24px] py-3" : "bg-transparent border-transparent backdrop-blur-none py-5"}`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <a
