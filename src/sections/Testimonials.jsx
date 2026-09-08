@@ -2,8 +2,6 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
-const linkedInRecommendationsLink =
-  "https://www.linkedin.com/in/lucassproat/details/recommendations/?detailScreenTabIndex=0";
 const testimonials = [
   {
     quote:
@@ -128,7 +126,10 @@ export const Testimonials = () => {
           </div>
         </div>
         <div className="text-center mt-8 animate-fade-in animation-delay-300">
-          <AnimatedBorderButton>
+          <AnimatedBorderButton
+            href="https://www.linkedin.com/in/lucassproat/details/recommendations/?detailScreenTabIndex=0"
+            target="_blank"
+          >
             View All On LinkedIn
             <ArrowUpRight className="w-5 h-5" />
           </AnimatedBorderButton>

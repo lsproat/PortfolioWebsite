@@ -5,8 +5,8 @@ import { useState } from "react";
 const contactInfo = [
   {
     icon: Mail,
-    label: "Email",
-    value: "",
+    label: "Message",
+    value: "Contact me using the form or on LinkedIn",
     href: "",
   },
   {
@@ -126,7 +126,7 @@ export const ContactMe = () => {
                 </label>
                 <textarea
                   id="message"
-                  rows={5}
+                  rows={4}
                   required
                   value={formData.message}
                   onChange={(e) =>
@@ -174,7 +174,7 @@ export const ContactMe = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-6 animate-fade-in animation-delay-400">
+          <div className="space-y-13 animate-fade-in animation-delay-400">
             <div className="glass rounded-3xl p-8">
               <h3 className="text-xl font-semibold mb-6">
                 Contact Information

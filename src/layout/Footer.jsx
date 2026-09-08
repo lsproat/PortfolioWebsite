@@ -1,14 +1,19 @@
 import { RiGithubFill, RiLinkedinFill } from "@remixicon/react";
 
 const socialLinks = [
-  { icon: RiGithubFill, href: "#", label: "GitHub" },
-  { icon: RiLinkedinFill, href: "#", label: "LinkedIn" },
+  { icon: RiGithubFill, href: "https://github.com/lsproat", label: "GitHub" },
+  {
+    icon: RiLinkedinFill,
+    href: "https://www.linkedin.com/in/lucassproat/",
+    label: "LinkedIn",
+  },
 ];
 
 const footerLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
+  { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -19,7 +24,6 @@ export const Footer = () => {
     <footer className="py-12 border-t border-border">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="text-xl font-bold tracking-tight">
               LS<span className="text-primary">.</span>
@@ -29,7 +33,6 @@ export const Footer = () => {
             </p>
           </div>
 
-          {/* Links */}
           <nav className="flex flex-wrap justify-center gap-6">
             {footerLinks.map((link) => (
               <a
@@ -42,13 +45,13 @@ export const Footer = () => {
             ))}
           </nav>
 
-          {/* Social Links */}
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
+                target="_blank"
                 className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all"
               >
                 <social.icon className="w-5 h-5" />

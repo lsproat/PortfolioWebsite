@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import { ArrowRight, ChevronDown, Download, SparkleIcon } from "lucide-react";
+import { ArrowRight, ChevronDown, FileText, SparkleIcon } from "lucide-react";
 import { RiGithubFill, RiLinkedinFill } from "@remixicon/react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
@@ -65,8 +65,10 @@ export const Profile = () => {
                   Contact Me <ArrowRight className="w-5 h-5" />
                 </Button>
               </a>
-              <AnimatedBorderButton>
-                <Download className="w-5 h-5" /> Download Resume
+              <AnimatedBorderButton
+                onClick={() => window.open("Lucas Sproat Resume.pdf", "_blank")}
+              >
+                <FileText className="w-5 h-5" /> View Resume
               </AnimatedBorderButton>
             </div>
 

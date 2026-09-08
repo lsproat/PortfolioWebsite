@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@property --button-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @theme {
   --color-background: #0f1418;
   --color-foreground: #f0f2f5;
@@ -173,16 +179,42 @@
   }
 
   @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -500;
+    to {
+      --button-border-angle: 360deg;
     }
   }
 
-  .group:hover .animated-border-path {
+  .animated-border::before {
+    content: "";
+    position: absolute;
+    /* Include the button's 1px border so both outlines share an outer edge. */
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    background: conic-gradient(
+      from var(--button-border-angle),
+      transparent 0deg 90deg,
+      var(--color-primary) 180deg 270deg,
+      transparent 360deg
+    );
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  .animated-border:hover::before {
+    opacity: 1;
     animation: animated-border 1.5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animated-border:hover::before {
+      animation: none;
+    }
   }
 
   .animated-border:hover {
