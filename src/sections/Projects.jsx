@@ -12,15 +12,15 @@ const projects = [
     link: "",
     github: "https://github.com/lsproat/PortfolioWebsite",
   },
-  {
-    title: "Project #2",
-    description:
-      "Project #2 description. A very interesting and attention grabbing project that taught me a lot of great things.",
-    image: "/projects/placeholder-showcase-image.png",
-    tags: ["Tech1", "Tech2", "Tech3"],
-    link: "#",
-    github: "#",
-  },
+  // {
+  //   title: "Project #2",
+  //   description:
+  //     "Project #2 description. A very interesting and attention grabbing project that taught me a lot of great things.",
+  //   image: "/projects/placeholder-showcase-image.png",
+  //   tags: ["Tech1", "Tech2", "Tech3"],
+  //   link: "#",
+  //   github: "#",
+  // },
 ];
 
 export const Projects = () => {
@@ -47,7 +47,9 @@ export const Projects = () => {
         </div>
 
         {/* Project cards */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Comment back in for multiple project cards. Current implementation keep singular card smaller sized
+        <div className="grid md:grid-cols-2 gap-8"> */}
+        <div className="grid grid-cols-1 gap-8 max-w-xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={index}

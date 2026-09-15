@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/Button";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { Turnstile } from "@/components/Turnstile";
 
 const contactInfo = [
   {
@@ -22,7 +23,11 @@ export const ContactMe = () => {
     name: "",
     email: "",
     message: "",
+    website: "",
   });
+  const submitting = useRef(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [resetKey, setResetKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({
     type: null, // 'success' or 'error
@@ -31,28 +36,44 @@ export const ContactMe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (submitting.current) return;
+    if (!formData.name.trim() || formData.message.trim().length < 10) {
+      setSubmitStatus({ type: "error", message: "Enter your name and a message of at least 10 characters." });
+      return;
+    }
+    if (!turnstileToken) {
+      setSubmitStatus({ type: "error", message: "Please complete verification before sending." });
+      return;
+    }
+    submitting.current = true;
     setIsLoading(true);
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      // try sending message
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, turnstileToken }),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!response.ok || (await response.json()).ok !== true) throw new Error();
 
       setSubmitStatus({
         type: "success",
         message: "Message sent successfully!",
       });
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      // handle error
-
+      setFormData({ name: "", email: "", message: "", website: "" });
+    } catch {
       setSubmitStatus({
         type: "error",
         message:
-          error.text || "Failed to sent message. Please try again later.",
+          "We couldn't confirm your message was sent. Please complete verification and try again.",
       });
     } finally {
       setIsLoading(false);
+      submitting.current = false;
+      setTurnstileToken("");
+      setResetKey((value) => value + 1);
     }
   };
   return (
@@ -78,7 +99,13 @@ export const ContactMe = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit} aria-busy={isLoading}>
+              <div hidden aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })} />
+              </div>
               <div>
                 <label
                   htmlFor="name"
@@ -88,6 +115,10 @@ export const ContactMe = () => {
                 </label>
                 <input
                   id="name"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={100}
+                  disabled={isLoading}
                   type="text"
                   required
                   value={formData.name}
@@ -107,6 +138,10 @@ export const ContactMe = () => {
                 </label>
                 <input
                   id="email"
+                  name="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  disabled={isLoading}
                   type="email"
                   required
                   value={formData.email}
@@ -126,6 +161,10 @@ export const ContactMe = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  minLength={10}
+                  maxLength={5000}
+                  disabled={isLoading}
                   rows={4}
                   required
                   value={formData.message}
@@ -137,17 +176,21 @@ export const ContactMe = () => {
                 />
               </div>
 
+              <Turnstile onToken={setTurnstileToken} resetKey={resetKey} />
+              {!turnstileToken && !isLoading && (
+                <p role="status" className="text-sm text-muted-foreground">Waiting for verification before sending.</p>
+              )}
               <Button
-                className="w-full"
+                className="w-full disabled:opacity-60 disabled:cursor-not-allowed"
                 type="submit"
                 size="lg"
-                disabled={isLoading}
+                disabled={isLoading || !turnstileToken}
               >
                 {isLoading ? (
                   <>Sending</>
                 ) : (
                   <>
-                    Send Message
+                    Send message
                     <Send className="w-5 h-5" />
                   </>
                 )}
@@ -155,6 +198,7 @@ export const ContactMe = () => {
 
               {submitStatus.type && (
                 <div
+                  role={submitStatus.type === "error" ? "alert" : "status"}
                   className={`flex items-center gap-3
                      p-4 rounded-xl ${
                        submitStatus.type === "success"

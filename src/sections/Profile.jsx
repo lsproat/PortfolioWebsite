@@ -24,7 +24,7 @@ export const Profile = () => {
         <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/20 to-background" />
       </div>
       {/* Content */}
-      <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+      <div className="container mx-auto px-6 pt-30 pb-20 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
           {/* Left */}
           <div className="space-y-8">
