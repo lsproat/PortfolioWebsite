@@ -4,23 +4,23 @@ import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
 const projects = [
   {
+    title: "Cosmo",
+    description:
+      "An extensible AI orchestration Web API built with .NET, CQRS, and MediatR. Cosmo provides a model-agnostic layer for managing conversations, LLM providers, context, memory, and tools while exploring the architecture behind modern AI applications.",
+    image: "/projects/cosmo-showcase-image.png",
+    tags: [".NET", "Web API", "MediatR", "CQRS", "LLM / AI", "CI/CD"],
+    link: "https://github.com/lsproat/Cosmo",
+    github: "https://github.com/lsproat/Cosmo",
+  },
+  {
     title: "Portfolio Website",
     description:
       "This website! Written with custom ReactJS and TailwindCSS, this project was a really fun way to create a showcase of my front-end skills and learn new technology.",
     image: "/projects/portfolio-website-showcase-image.png",
     tags: ["ReactJS", "TailwindCSS", "Vercel"],
-    link: "",
+    link: "https://github.com/lsproat/PortfolioWebsite",
     github: "https://github.com/lsproat/PortfolioWebsite",
   },
-  // {
-  //   title: "Project #2",
-  //   description:
-  //     "Project #2 description. A very interesting and attention grabbing project that taught me a lot of great things.",
-  //   image: "/projects/placeholder-showcase-image.png",
-  //   tags: ["Tech1", "Tech2", "Tech3"],
-  //   link: "#",
-  //   github: "#",
-  // },
 ];
 
 export const Projects = () => {
@@ -47,13 +47,12 @@ export const Projects = () => {
         </div>
 
         {/* Project cards */}
-        {/* Comment back in for multiple project cards. Current implementation keep singular card smaller sized
-        <div className="grid md:grid-cols-2 gap-8"> */}
-        <div className="grid grid-cols-1 gap-8 max-w-xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <div
+            <a
               key={index}
-              className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+              className="cursor-pointer group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+              onClick={() => window.open(project.link, "_blank")}
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
               <div className="relative overflow-hidden aspect-video">
@@ -68,7 +67,10 @@ export const Projects = () => {
                  to-transparent opacity-60"
                 />
 
-                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* This commented section adds arrow and github icons to the center of the project
+                    image on hover. I didn't like obstructing the image so I just made the whole tile
+                    clickable and added the pointer cursor.*/}
+                {/* <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {project.link != "" && (
                     <a
                       href={project.link}
@@ -88,7 +90,7 @@ export const Projects = () => {
                       <RiGithubFill className="w-5 h-5" />
                     </a>
                   )}
-                </div>
+                </div> */}
               </div>
 
               {/* Project details */}
@@ -113,7 +115,7 @@ export const Projects = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
